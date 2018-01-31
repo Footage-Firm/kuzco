@@ -1,8 +1,7 @@
 {
-  "name": "kuzco",
+  "name": "@videoblocks/kuzco",
   "subdomain": "kuzco",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.0.1",
   "scripts": {},
   "devDependencies": {
     "axios": "0.9.1",
