@@ -1,2 +1,4 @@
-webpack/
+.gitattributes
 .idea/
+src/
+webpack/

@@ -1,5 +1,3 @@
-require('../stylesheets/main.styl');
-
 import React from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
@@ -35,7 +33,7 @@ class NPSModal extends React.Component {
     render() {
         return (
             <Modal id="nps-modal" show={this.state.visible} onHide={this.close}>
-                <Modal.Header closeButton />
+                <Modal.Header closeButton style={{border: "none", paddingBottom: 0}}/>
                 <Modal.Body >
                     { this.state.showFollowUp ? this.renderFollowUpForm() : this.renderMainQuestion() }
                 </Modal.Body>
@@ -55,7 +53,7 @@ class NPSModal extends React.Component {
                             {_.map(SCORES, score => {
                                 return (
                                     <div className="col-xs-1">
-                                        <div className="btn btn-primary" key={score} onClick={() => this.onScoreClick(score)}> {score} </div>
+                                        <div className="btn btn-primary" style={{}} key={score} onClick={() => this.onScoreClick(score)}> {score} </div>
                                     </div>
                                 );
                             })}
@@ -88,7 +86,7 @@ class NPSModal extends React.Component {
                 </div>
                 <div className="row form-group">
                     <div className="col-xs-12">
-                        <textarea value={this.state.comment} onChange={this.handleCommentChange} />
+                        <textarea style={{width: "100%"}} value={this.state.comment} onChange={this.handleCommentChange} />
                     </div>
                 </div>
                 <div className="row form-group">
@@ -116,6 +114,7 @@ class NPSModal extends React.Component {
 
     close = () => {
         // TODO: Send event to pipeline
+        // TODO: Send score and follow up as separate events (in case user closes browser after selecting score)
         if (this.state.score) {
             axios.post(this.props.applicationEndpoint, {score: this.state.score, comment: this.state.comment});
         }

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import NPSModal from '../../lib/NPSModal'
+import NPSModal from '../../src/NPSModal'
 
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 

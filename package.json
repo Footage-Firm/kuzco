@@ -1,9 +1,10 @@
 {
   "name": "@videoblocks/kuzco",
   "subdomain": "kuzco",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "scripts": {
-    "example": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js"
+    "example": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js",
+    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
   },
   "devDependencies": {
     "axios": "0.9.1",
