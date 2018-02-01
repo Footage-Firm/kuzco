@@ -1,7 +1,7 @@
 {
   "name": "@videoblocks/kuzco",
   "subdomain": "kuzco",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "example": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js"
   },
@@ -25,9 +25,7 @@
     "style-loader": "^0.20.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "url-loader": "^0.6.2"
-  },
-  "dependencies": {
+    "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
   },
