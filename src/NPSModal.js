@@ -52,8 +52,12 @@ class NPSModal extends React.Component {
                         <div className="row">
                             {_.map(SCORES, score => {
                                 return (
-                                    <div className="col-xs-1">
-                                        <div className="btn btn-primary" style={{}} key={score} onClick={() => this.onScoreClick(score)}> {score} </div>
+                                    <div className="col-xs-1" key={score}>
+                                        <div className={this.state.score!== null && this.state.score >= score ? "btn btn-primary" : "btn btn-default"}
+                                             style={this.state.score === score ? {transform: "scale(1.25)" } : {}}
+                                             onMouseEnter={() => this.onMouseEnter(score)}
+                                             onMouseLeave={() => this.onMouseLeave()}
+                                             onClick={() => this.onScoreClick(score)}> {score} </div>
                                     </div>
                                 );
                             })}
@@ -63,40 +67,50 @@ class NPSModal extends React.Component {
                 <div className="row form-group">
                     <div className="col-xs-10 col-xs-offset-1">
                         <div className="row">
-                            <div className="col-xs-3 text-left">Not likely</div>
-                            <div className="col-xs-3 col-xs-offset-6">Very likely</div>
+                            <div className="col-xs-3 text-left small">Not likely</div>
+                            <div className="col-xs-3 col-xs-offset-6 small">Very likely</div>
                         </div>
                     </div>
                 </div>
             </div>
         );
-    };
+    }
+
+    onMouseEnter = (score) => {
+        this.setState({score})
+    }
+
+    onMouseLeave = () => {
+        this.setState({score: null});
+    }
 
     onScoreClick = (score) => {
         this.setState({showFollowUp: true, score});
-    };
+    }
 
     renderFollowUpForm = () => {
         const followUpQuestion = this.deriveFollowUpQuestion();
 
         return (
-            <div>
-                <div className="row form-group">
-                    <div className="col-xs-12">{followUpQuestion}</div>
-                </div>
-                <div className="row form-group">
-                    <div className="col-xs-12">
-                        <textarea style={{width: "100%"}} value={this.state.comment} onChange={this.handleCommentChange} />
+            <div className="row">
+                <div className="col-xs-10 col-xs-offset-1">
+                    <div className="row form-group">
+                        <div className="col-xs-12">{followUpQuestion}</div>
                     </div>
-                </div>
-                <div className="row form-group">
-                    <div className="col-xs-2 col-xs-offset-10">
-                        <Button className="btn btn-primary"  onClick={this.close}>Submit</Button>
+                    <div className="row form-group">
+                        <div className="col-xs-12">
+                            <textarea style={{width: "100%"}} value={this.state.comment} onChange={this.handleCommentChange} />
+                        </div>
+                    </div>
+                    <div className="row form-group">
+                        <div className="col-xs-2 col-xs-offset-10">
+                            <Button className="btn btn-primary"  onClick={this.close}>Submit</Button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
-    };
+    }
 
     deriveFollowUpQuestion = () => {
         if (this.state.score < 7) {
@@ -106,11 +120,11 @@ class NPSModal extends React.Component {
         } else {
             return NEUTRAL_FOLLOW_UP;
         }
-    };
+    }
 
     handleCommentChange = (event) => {
         this.setState({comment: event.target.value});
-    };
+    }
 
     close = () => {
         // TODO: Send event to pipeline
