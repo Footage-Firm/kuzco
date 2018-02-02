@@ -19,7 +19,8 @@ Use product-specific rules engine to determine when to add the modal to the Reac
 | Application Endpoint  | String        | No            | API endpoint to send data to application in addition to event pipeline. |
 
 
-###Demo
+### Demo
 
 Run `npm run example`
+
 Go to `localhost:8080`
