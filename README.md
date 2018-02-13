@@ -22,4 +22,5 @@ Go to `localhost:8080`
 | Property              | Type          | Required      | Description                                                             |
 | --------------------- | ------------- |---------------|-------------------------------------------------------------------------|
 | Main Question         | String        | Yes           | Product specific first question.                                        |
-| Application Endpoint  | String        | No            | API endpoint to send data to application in addition to event pipeline. |
+| onScoreClick          | Function      | Yes           | Function for parent component to handle User selecting score.           |
+| onCommentSubmit       | Function      | Yes           | Function for parent component to handle User submitting comment.        |
