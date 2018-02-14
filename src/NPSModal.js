@@ -85,7 +85,7 @@ class NPSModal extends React.Component {
             <div>
                 <div className="left-row">{followUpQuestion}</div>
                 <textarea rows="3"value={this.state.comment} onChange={this.handleCommentChange} />
-                <div className="right-row"><Button className="btn btn-primary" onClick={this.close}>Submit</Button></div>
+                <div className="right-row"><Button className="btn btn-primary" onClick={this.submit}>Submit</Button></div>
             </div>
         );
     }
@@ -104,8 +104,12 @@ class NPSModal extends React.Component {
         this.setState({comment: event.target.value});
     }
 
-    close = () => {
+    submit = () => {
         this.props.onCommentSubmit(this.state.comment);
+        this.setState({visible: false});
+    }
+
+    close = () => {
         this.setState({visible: false});
     }
 }
