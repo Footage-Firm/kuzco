@@ -2,21 +2,18 @@ import React from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 
-
-const PROMOTER_FOLLOW_UP = 'We\'re so happy you\'re happy! We\'d love to hear more about your experience:';
-const NEUTRAL_FOLLOW_UP  = 'How can we improve your experience?';
-const DETRACTOR_FOLLOW_UP  = 'We\'re sorry you feel that way! What is our product missing?';
-
-const DETRACTOR_UPPER_BOUND = 6;
-const PROMOTER_LOWER_BOUND = 9;
-
-const MAX_SCORE = 10;
-const SCORES = Array(MAX_SCORE+1).fill(0).map((val, index) => index);
-
 class NPSModal extends React.Component {
 
     static propTypes = {
         mainQuestion: React.PropTypes.string.isRequired,
+        promoterFollowUpQuestion: React.PropTypes.string.isRequired,
+        neutralFollowUpQuestion: React.PropTypes.string.isRequired,
+        detractorFollowUpQuestion: React.PropTypes.string.isRequired,
+
+        maxScore: React.PropTypes.number.isRequired,
+        detractorUpperBound: React.PropTypes.number.isRequired,
+        promoterLowerBound: React.PropTypes.number.isRequired,
+
         onScoreClick: React.PropTypes.func.isRequired,
         onCommentSubmit: React.PropTypes.func.isRequired
     }
@@ -25,10 +22,12 @@ class NPSModal extends React.Component {
         super(props);
 
         this.state = {
+            scoreRange: Array(this.props.maxScore + 1).fill(0).map((val, index) => index),
             visible: true,
             showFollowUp: false,
             score: null,
-            comment: ""
+            comment: '',
+            followUpQuestion: ''
         };
     }
 
@@ -48,7 +47,7 @@ class NPSModal extends React.Component {
             <div>
                 <div className="centered-row"> {this.props.mainQuestion} </div>
                 <div className="centered-row" style={{marginBottom: "32px"}}>
-                    {SCORES.map(score => {
+                    {this.state.scoreRange.map(score => {
                         return (
                             <div key={score} className="score">
                                 <div className={this.state.score!== null && this.state.score >= score ? "btn btn-primary" : "btn btn-default"}
@@ -74,7 +73,7 @@ class NPSModal extends React.Component {
     }
 
     onScoreClick = (score) => {
-        this.props.onScoreClick(score);
+        this.props.onScoreClick(score, this.props.mainQuestion);
         this.setState({showFollowUp: true, score});
     }
 
@@ -85,18 +84,18 @@ class NPSModal extends React.Component {
             <div>
                 <div className="left-row">{followUpQuestion}</div>
                 <textarea rows="3"value={this.state.comment} onChange={this.handleCommentChange} />
-                <div className="right-row"><Button className="btn btn-primary" onClick={this.submit}>Submit</Button></div>
+                <div className="right-row"><Button className="btn btn-primary" onClick={() => this.submit(followUpQuestion)}>Submit</Button></div>
             </div>
         );
     }
 
     deriveFollowUpQuestion() {
-        if (this.state.score <= DETRACTOR_UPPER_BOUND) {
-            return DETRACTOR_FOLLOW_UP;
-        } else if (this.state.score >= PROMOTER_LOWER_BOUND) {
-            return PROMOTER_FOLLOW_UP;
+        if (this.state.score <= this.props.detractorUpperBound) {
+           return this.props.detractorFollowUpQuestion;
+        } else if (this.state.score >= this.props.promoterLowerBound) {
+            return this.props.promoterLowerBound;
         } else {
-            return NEUTRAL_FOLLOW_UP;
+            return this.props.neutralFollowUpQuestion;
         }
     }
 
@@ -104,8 +103,9 @@ class NPSModal extends React.Component {
         this.setState({comment: event.target.value});
     }
 
-    submit = () => {
-        this.props.onCommentSubmit(this.state.comment);
+    submit(followUpQuestion) {
+        console.log(followUpQuestion);
+        this.props.onCommentSubmit(this.state.comment, followUpQuestion);
         this.setState({visible: false});
     }
 
