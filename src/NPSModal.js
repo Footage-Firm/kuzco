@@ -26,8 +26,7 @@ class NPSModal extends React.Component {
             visible: true,
             showFollowUp: false,
             score: null,
-            comment: '',
-            followUpQuestion: ''
+            comment: ''
         };
     }
 
@@ -104,7 +103,6 @@ class NPSModal extends React.Component {
     }
 
     submit(followUpQuestion) {
-        console.log(followUpQuestion);
         this.props.onCommentSubmit(this.state.comment, followUpQuestion);
         this.setState({visible: false});
     }
