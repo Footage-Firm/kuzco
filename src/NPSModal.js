@@ -92,7 +92,7 @@ class NPSModal extends React.Component {
         if (this.state.score <= this.props.detractorUpperBound) {
            return this.props.detractorFollowUpQuestion;
         } else if (this.state.score >= this.props.promoterLowerBound) {
-            return this.props.promoterLowerBound;
+            return this.props.promoterFollowUpQuestion;
         } else {
             return this.props.neutralFollowUpQuestion;
         }
