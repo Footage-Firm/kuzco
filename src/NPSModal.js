@@ -1,21 +1,22 @@
 import React from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
+import PropTypes from 'prop-types'
 
 class NPSModal extends React.Component {
 
     static propTypes = {
-        mainQuestion: React.PropTypes.string.isRequired,
-        promoterFollowUpQuestion: React.PropTypes.string.isRequired,
-        neutralFollowUpQuestion: React.PropTypes.string.isRequired,
-        detractorFollowUpQuestion: React.PropTypes.string.isRequired,
+        mainQuestion: PropTypes.string.isRequired,
+        promoterFollowUpQuestion: PropTypes.string.isRequired,
+        neutralFollowUpQuestion: PropTypes.string.isRequired,
+        detractorFollowUpQuestion: PropTypes.string.isRequired,
 
-        maxScore: React.PropTypes.number.isRequired,
-        detractorUpperBound: React.PropTypes.number.isRequired,
-        promoterLowerBound: React.PropTypes.number.isRequired,
+        maxScore: PropTypes.number.isRequired,
+        detractorUpperBound: PropTypes.number.isRequired,
+        promoterLowerBound: PropTypes.number.isRequired,
 
-        onScoreClick: React.PropTypes.func.isRequired,
-        onCommentSubmit: React.PropTypes.func.isRequired
+        onScoreClick: PropTypes.func.isRequired,
+        onCommentSubmit: PropTypes.func.isRequired
     }
 
     constructor(props) {
