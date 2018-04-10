@@ -1,7 +1,7 @@
 {
   "name": "kuzco",
   "subdomain": "kuzco",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "example": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js",
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
@@ -12,6 +12,12 @@
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.0.0",
     "prop-types": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-bootstrap": "^0.32.0",
+    "react-dom": "^16.0.0",
+    "prop-types": ^15.6.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
