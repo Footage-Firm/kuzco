@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/lib/Button'
 class NPSModal extends React.Component {
 
     static propTypes = {
+        header: React.PropTypes.string,
+        modalClassName: React.PropTypes.string,
         mainQuestion: React.PropTypes.string.isRequired,
         promoterFollowUpQuestion: React.PropTypes.string.isRequired,
         neutralFollowUpQuestion: React.PropTypes.string.isRequired,
@@ -13,10 +15,19 @@ class NPSModal extends React.Component {
         maxScore: React.PropTypes.number.isRequired,
         detractorUpperBound: React.PropTypes.number.isRequired,
         promoterLowerBound: React.PropTypes.number.isRequired,
+        minScoreBlurb: React.PropTypes.string,
+        maxScoreBlurb: React.PropTypes.string,
 
         onScoreClick: React.PropTypes.func.isRequired,
         onCommentSubmit: React.PropTypes.func.isRequired
-    }
+    };
+
+    static defaultProps = {
+        header: '',
+        modalClassName: "general",
+        minScoreBlurb: "Not likely",
+        maxScoreBlurb: "Very likely"
+    };
 
     constructor(props) {
         super(props);
@@ -34,7 +45,7 @@ class NPSModal extends React.Component {
         return (
             <Modal id="nps-modal" show={this.state.visible} onHide={this.close}>
                 <Modal.Header closeButton/>
-                <Modal.Body>
+                <Modal.Body  className={this.props.modalClassName}>
                     { this.state.showFollowUp ? this.renderFollowUpForm() : this.renderMainQuestion() }
                 </Modal.Body>
             </Modal>
@@ -42,9 +53,19 @@ class NPSModal extends React.Component {
     }
 
     renderMainQuestion() {
+
+        const {
+            header,
+            mainQuestion,
+            minScoreBlurb,
+            maxScoreBlurb
+        } = this.props;
         return (
             <div>
-                <div className="centered-row"> {this.props.mainQuestion} </div>
+                {header !== '' &&
+                    <div className="centered-row"><h1>{header}</h1></div>
+                }
+                <div className="centered-row"> {mainQuestion} </div>
                 <div className="centered-row" style={{marginBottom: "32px"}}>
                     {this.state.scoreRange.map(score => {
                         return (
@@ -53,8 +74,8 @@ class NPSModal extends React.Component {
                                      onMouseEnter={() => this.onMouseEnter(score)}
                                      onMouseLeave={() => this.onMouseLeave()}
                                      onClick={() => this.onScoreClick(score)}> {score} </div>
-                                {score === 0 ? <div className="score-label">Not likely</div> : ''}
-                                {score === 10 ? <div className="score-label" style={{right: "11%"}}>Very likely</div> : ''}
+                                {score === 0 ? <div className="score-label">{minScoreBlurb}</div> : ''}
+                                {score === 10 ? <div className="score-label" style={{right: "11%"}}>{ maxScoreBlurb}</div> : ''}
                             </div>
                         );
                     })}
