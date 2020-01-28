@@ -1,16 +1,22 @@
 {
   "name": "kuzco",
   "subdomain": "kuzco",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "scripts": {
     "example": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.dev.config.js",
     "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
   },
   "dependencies": {
     "bootstrap": "^3.2.0",
-    "react": "15.4.2",
-    "react-bootstrap": "0.30.7",
-    "react-dom": "15.4.2"
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-bootstrap": "^0.33.1",
+    "react-dom": "^16.12.0"
+  },
+  "license":"MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Footage-Firm/kuzco"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,3 +1,4 @@
+import { func, number, string } from 'prop-types';
 import React from 'react'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
@@ -5,21 +6,21 @@ import Button from 'react-bootstrap/lib/Button'
 class NPSModal extends React.Component {
 
     static propTypes = {
-        header: React.PropTypes.string,
-        modalClassName: React.PropTypes.string,
-        mainQuestion: React.PropTypes.string.isRequired,
-        promoterFollowUpQuestion: React.PropTypes.string.isRequired,
-        neutralFollowUpQuestion: React.PropTypes.string.isRequired,
-        detractorFollowUpQuestion: React.PropTypes.string.isRequired,
+        header: string,
+        modalClassName: string,
+        mainQuestion: string.isRequired,
+        promoterFollowUpQuestion: string.isRequired,
+        neutralFollowUpQuestion: string.isRequired,
+        detractorFollowUpQuestion: string.isRequired,
 
-        maxScore: React.PropTypes.number.isRequired,
-        detractorUpperBound: React.PropTypes.number.isRequired,
-        promoterLowerBound: React.PropTypes.number.isRequired,
-        minScoreBlurb: React.PropTypes.string,
-        maxScoreBlurb: React.PropTypes.string,
+        maxScore: number.isRequired,
+        detractorUpperBound: number.isRequired,
+        promoterLowerBound: number.isRequired,
+        minScoreBlurb: string,
+        maxScoreBlurb: string,
 
-        onScoreClick: React.PropTypes.func.isRequired,
-        onCommentSubmit: React.PropTypes.func.isRequired
+        onScoreClick: func.isRequired,
+        onCommentSubmit: func.isRequired
     };
 
     static defaultProps = {
