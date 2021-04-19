@@ -1,137 +1,178 @@
-import { func, number, string } from 'prop-types';
-import React from 'react'
-import Modal from 'react-bootstrap/lib/Modal'
-import Button from 'react-bootstrap/lib/Button'
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 
-class NPSModal extends React.Component {
+import '../stylesheets/nps-modal.css';
 
-    static propTypes = {
-        header: string,
-        modalClassName: string,
-        mainQuestion: string.isRequired,
-        promoterFollowUpQuestion: string.isRequired,
-        neutralFollowUpQuestion: string.isRequired,
-        detractorFollowUpQuestion: string.isRequired,
-
-        maxScore: number.isRequired,
-        detractorUpperBound: number.isRequired,
-        promoterLowerBound: number.isRequired,
-        minScoreBlurb: string,
-        maxScoreBlurb: string,
-
-        onScoreClick: func.isRequired,
-        onCommentSubmit: func.isRequired
-    };
-
-    static defaultProps = {
-        header: '',
-        modalClassName: "general",
-        minScoreBlurb: "Not likely",
-        maxScoreBlurb: "Very likely"
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            scoreRange: Array(this.props.maxScore + 1).fill(0).map((val, index) => index),
-            visible: true,
-            showFollowUp: false,
-            score: null,
-            comment: ''
-        };
-    }
-
-    render() {
-        return (
-            <Modal id="nps-modal" show={this.state.visible} onHide={this.close}>
-                <Modal.Header closeButton/>
-                <Modal.Body  className={this.props.modalClassName}>
-                    { this.state.showFollowUp ? this.renderFollowUpForm() : this.renderMainQuestion() }
-                </Modal.Body>
-            </Modal>
-        );
-    }
-
-    renderMainQuestion() {
-
-        const {
-            header,
-            mainQuestion,
-            minScoreBlurb,
-            maxScoreBlurb
-        } = this.props;
-        return (
-            <div>
-                {header !== '' &&
-                    <div className="centered-row"><h1>{header}</h1></div>
-                }
-                <div className="centered-row"> {mainQuestion} </div>
-                <div className="centered-row" style={{marginBottom: "32px"}}>
-                    {this.state.scoreRange.map(score => {
-                        return (
-                            <div key={score} className="score">
-                                <div className={this.state.score!== null && this.state.score >= score ? "btn btn-primary" : "btn btn-default"}
-                                     onMouseEnter={() => this.onMouseEnter(score)}
-                                     onMouseLeave={() => this.onMouseLeave()}
-                                     onClick={() => this.onScoreClick(score)}> {score} </div>
-                                {score === 0 ? <div className="score-label">{minScoreBlurb}</div> : ''}
-                                {score === 10 ? <div className="score-label" style={{right: "11%"}}>{ maxScoreBlurb}</div> : ''}
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        );
-    }
-
-    onMouseEnter = (score) => {
-        this.setState({score});
-    }
-
-    onMouseLeave = () => {
-        this.setState({score: null});
-    }
-
-    onScoreClick = (score) => {
-        this.props.onScoreClick(score, this.props.mainQuestion);
-        this.setState({showFollowUp: true, score});
-    }
-
-    renderFollowUpForm() {
-        const followUpQuestion = this.deriveFollowUpQuestion();
-
-        return (
-            <div>
-                <div className="left-row">{followUpQuestion}</div>
-                <textarea rows="3"value={this.state.comment} onChange={this.handleCommentChange} />
-                <div className="right-row"><Button className="btn btn-primary" onClick={() => this.submit(followUpQuestion)}>Submit</Button></div>
-            </div>
-        );
-    }
-
-    deriveFollowUpQuestion() {
-        if (this.state.score <= this.props.detractorUpperBound) {
-           return this.props.detractorFollowUpQuestion;
-        } else if (this.state.score >= this.props.promoterLowerBound) {
-            return this.props.promoterFollowUpQuestion;
-        } else {
-            return this.props.neutralFollowUpQuestion;
-        }
-    }
-
-    handleCommentChange = (event) => {
-        this.setState({comment: event.target.value});
-    }
-
-    submit(followUpQuestion) {
-        this.props.onCommentSubmit(this.state.comment, followUpQuestion);
-        this.setState({visible: false});
-    }
-
-    close = () => {
-        this.setState({visible: false});
-    }
+const getScoreRange = (maxScore) => {
+    return Array.from({ length: maxScore + 1 }, (_, i) => i);
 }
 
-export default NPSModal
+Modal.setAppElement('body');
+
+const NPSModal = (props) => {
+    const {
+        detractorFollowUpQuestion,
+        detractorUpperBound,
+        header,
+        mainQuestion,
+        maxScore,
+        maxScoreBlurb,
+        minScoreBlurb,
+        modalClassName,
+        neutralFollowUpQuestion,
+        onCommentSubmit,
+        onScoreClick,
+        overlayClassName,
+        promoterFollowUpQuestion,
+        promoterLowerBound,
+    } = props;
+
+    const [scoreRange, setScoreRange] = useState(getScoreRange(maxScore))
+    const [visible, setVisible] = useState(true);
+    const [showFollowUp, setShowFollowUp] = useState(false);
+    const [followUpQuestion, setFollowUpQuestion] = useState();
+    const [score, setScore] = useState();
+    const [comment, setComment] = useState('');
+    const [contentRef, setContentRef] = useState();
+
+    useEffect(() => {
+        setScoreRange(getScoreRange(maxScore));
+    }, [maxScore])
+
+    useEffect(() => {
+        if (score <= detractorUpperBound) {
+            setFollowUpQuestion(detractorFollowUpQuestion);
+        } else if (score < promoterLowerBound) {
+            setFollowUpQuestion(neutralFollowUpQuestion);
+        } else {
+            setFollowUpQuestion(promoterFollowUpQuestion);
+        }
+    }, [score])
+
+    useEffect(() => {
+        if (contentRef) {
+            contentRef.style.opacity = '100%';
+            contentRef.style.top = '120px';
+        }
+    }, [contentRef])
+
+    const handleScoreSelected = (selectedScore) => {
+        onScoreClick(score, mainQuestion);
+        setScore(selectedScore);
+        setShowFollowUp(true);
+    }
+
+    const handleCloseRequest = () => {
+        if (contentRef) {
+            contentRef.style.opacity = '0';
+            contentRef.style.top = '0';
+        }
+
+        setTimeout(() => {
+            setVisible(false);
+        }, 200)
+    }
+
+    const handleCommentSubmit = () => {
+        onCommentSubmit(comment, followUpQuestion);
+        handleCloseRequest();
+    }
+
+    return (
+        <Modal
+            id="nps-modal"
+            isOpen={visible}
+            className={`nps-modal__content ${modalClassName}`}
+            contentRef={node => setContentRef(node)}
+            onRequestClose={handleCloseRequest}
+            overlayClassName={`nps-modal__overlay ${overlayClassName}`}
+        >
+            <button
+                className="close-button"
+                onClick={handleCloseRequest}
+            >×</button>
+
+            { !!header && (
+                <h2 className="modal-header">{header}</h2>
+            )}
+
+            <div className="modal-body">
+                { showFollowUp
+                    ? (
+                        <form className="follow-up-container">
+                            <label htmlFor="comment-input" className="question-prompt">{followUpQuestion}</label>
+                            <textarea
+                                className="comment-input"
+                                id="comment-input"
+                                onChange={({ target }) => setComment(target.value)}
+                                rows="3"
+                                value={comment}
+                            />
+                            <div className="form-actions">
+                                <button
+                                    className="button-submit"
+                                    onClick={handleCommentSubmit}
+                                >Submit</button>
+                            </div>
+                        </form>
+                    ) : (
+                        <div
+                            className="score-selector-container"
+                            onMouseLeave={() => setScore(undefined)}
+                        >
+                            <p className="question-prompt">{mainQuestion}</p>
+
+                            <div className="score-selector">
+                                {scoreRange.map((scoreOption) => (
+                                    <button
+                                        key={scoreOption}
+                                        className={`score-selection ${scoreOption <= score ? 'score-selection__active' : ''}`}
+                                        onMouseEnter={() => setScore(scoreOption)}
+                                        onClick={() => handleScoreSelected(score)}
+                                    >
+                                        {scoreOption}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="score-labels">
+                                <p className="score-label score-label__min">{minScoreBlurb}</p>
+                                <p className="score-label score-label__max">{maxScoreBlurb}</p>
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
+        </Modal>
+    )
+}
+
+NPSModal.propTypes = {
+    header: PropTypes.string,
+    modalClassName: PropTypes.string,
+    overlayClassName: PropTypes.string,
+    mainQuestion: PropTypes.string.isRequired,
+    promoterFollowUpQuestion: PropTypes.string.isRequired,
+    neutralFollowUpQuestion: PropTypes.string.isRequired,
+    detractorFollowUpQuestion: PropTypes.string.isRequired,
+
+    maxScore: PropTypes.number.isRequired,
+    detractorUpperBound: PropTypes.number.isRequired,
+    promoterLowerBound: PropTypes.number.isRequired,
+    minScoreBlurb: PropTypes.string,
+    maxScoreBlurb: PropTypes.string,
+
+    onScoreClick: PropTypes.func.isRequired,
+    onCommentSubmit: PropTypes.func.isRequired,
+}
+
+NPSModal.defaultProps = {
+    header: '',
+    maxScoreBlurb: 'Very likely',
+    minScoreBlurb: 'Not likely',
+    modalClassName: 'nps-modal',
+    overlayClassName: '',
+}
+
+export default NPSModal;
