@@ -50,6 +50,7 @@ const NPSModal = (props) => {
         }
     }, [score])
 
+    /* Defines the modal's placement after it mounts, used for the entrance transition */
     useEffect(() => {
         if (contentRef) {
             contentRef.style.opacity = '100%';
@@ -57,12 +58,7 @@ const NPSModal = (props) => {
         }
     }, [contentRef])
 
-    const handleScoreSelected = (selectedScore) => {
-        onScoreClick(score, mainQuestion);
-        setScore(selectedScore);
-        setShowFollowUp(true);
-    }
-
+    /* Delays modal exit to allow for transition styles */
     const handleCloseRequest = () => {
         if (contentRef) {
             contentRef.style.opacity = '0';
@@ -72,6 +68,12 @@ const NPSModal = (props) => {
         setTimeout(() => {
             setVisible(false);
         }, 200)
+    }
+
+    const handleScoreSelected = (selectedScore) => {
+        onScoreClick(score, mainQuestion);
+        setScore(selectedScore);
+        setShowFollowUp(true);
     }
 
     const handleCommentSubmit = () => {

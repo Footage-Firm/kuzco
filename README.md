@@ -38,19 +38,19 @@ Go to `localhost:8080`
 
 ### Props
 
-| Property                     | Type     | Required | Description                                                                                                                              |
-| ---------------------------- | -------- |----------|----------------------------------------------------------------------------------------------------------------------------------------- |
-| `header`                       | String   | No       | Eye catching header for question. |
-| `modalClassName`             | String   | No       | Modal Class Name this product belongs to, for styling purposes. |
-| `overlayClassName`             | String   | No       | Classname to attach to the react-modal overlay component (for custom styling) |
-| `mainQuestion`                | String   | Yes      | Product specific first question. |
-| `promoterFollowUpQuestion`  | String   | Yes      | Product specific question to ask users who chose a score in the promoter score range `[Promoter Lower Bound,..., Maximum Score]` |
-| `neutralFollowUpQuestion`   | String   | Yes      | Product specific question to ask users who chose a score in the neutral score range. `(Detractor Upper Bound,..., Promoter Upper Bound)` |
-| `detractorFollowUpQuestion` | String   | Yes      | Product specific question to ask users who chose a score in the detractor score range. `[0,..., Detractor Upper Bound]`                  |
-| Min Score Blurb              | String   | No       | Text associated with the lowest score |
-| Max Score Blurb              | String   | No       | Text associated with the highest score |
-| Max Score                    | Number   | Yes      | Maximum score for users to choose from. Zero is the minimum. |
-| Detractor Upper Bound        | Number   | Yes      | Inclusive upper boundary for detract score range. |
-| Promoter Lower Bound         | Number   | Yes      | Inclusive lower boundary for promoter score range. |
-| onScoreClick                 | Function | Yes      | Function for parent component to handle User selecting score. |
-| onCommentSubmit              | Function | Yes      | Function for parent component to handle User submitting comment. |
+| Property                    | Type     | Required | Description                                                                                                                              |
+| --------------------------- | -------- |----------|----------------------------------------------------------------------------------------------------------------------------------------- |
+| `header`                    | String   | No  | Eye catching header for question. |
+| `modalClassName`            | String   | No  | Modal Class Name this product belongs to, for styling purposes. |
+| `overlayClassName`          | String   | No  | Classname to attach to the react-modal overlay component (for custom styling) |
+| `mainQuestion`              | String   | Yes | Product specific first question. |
+| `promoterFollowUpQuestion`  | String   | Yes | Product specific question to ask users who chose a score in the promoter score range `[Promoter Lower Bound,..., Maximum Score]` |
+| `neutralFollowUpQuestion`   | String   | Yes | Product specific question to ask users who chose a score in the neutral score range. `(Detractor Upper Bound,..., Promoter Upper Bound)` |
+| `detractorFollowUpQuestion` | String   | Yes | Product specific question to ask users who chose a score in the detractor score range. `[0,..., Detractor Upper Bound]` |
+| `minScoreBlurb`             | String   | No  | Text associated with the lowest score |
+| `maxScoreBlurb`             | String   | No  | Text associated with the highest score |
+| `maxScore`                  | Number   | Yes | Maximum score for users to choose from. Zero is the minimum. |
+| `detractorUpperBound`       | Number   | Yes | Inclusive upper boundary for detract score range. |
+| `promoterLowerBound`        | Number   | Yes | Inclusive lower boundary for promoter score range. |
+| `onScoreClick`              | Function | Yes | Function for parent component to handle User selecting score. |
+| `onCommentSubmit`           | Function | Yes | Function for parent component to handle User submitting comment. |
