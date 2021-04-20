@@ -13,9 +13,10 @@
 
 .nps-modal__overlay {
     background: rgba(0, 0, 0, 0.6);
-    position: fixed;
-    width: 100%;
     height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .nps-modal__content {
@@ -23,11 +24,11 @@
     border-radius: 0.5em;
     box-shadow: var(--shadow-popover);
     left: 0;
+    margin: 0 auto;
+    max-width: 576px;
     opacity: 0;
     padding: 3em 2em 2.5em;
     position: absolute;
-    margin: 0 auto;
-    max-width: 576px;
     right: 0;
     top: 0;
     transition: all 200ms ease-out;
