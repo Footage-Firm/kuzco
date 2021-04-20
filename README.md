@@ -42,6 +42,7 @@ Go to `localhost:8080`
 | --------------------------- | -------- |----------|----------------------------------------------------------------------------------------------------------------------------------------- |
 | `header`                    | String   | No  | Eye catching header for question. |
 | `modalClassName`            | String   | No  | Modal Class Name this product belongs to, for styling purposes. |
+| `modalClassPrefix`          | String   | No  | Custom prefix to add in front of .modal-header and .modal-body elements, for styling purposes |
 | `overlayClassName`          | String   | No  | Classname to attach to the react-modal overlay component (for custom styling) |
 | `mainQuestion`              | String   | Yes | Product specific first question. |
 | `promoterFollowUpQuestion`  | String   | Yes | Product specific question to ask users who chose a score in the promoter score range `[Promoter Lower Bound,..., Maximum Score]` |
