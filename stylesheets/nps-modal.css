@@ -1,0 +1,161 @@
+/* Modal Styles */
+#nps-modal {
+    --color-main: #FFE121;
+    --color-hover: #E2C400;
+    --color-gray-700: #626C78;
+    --color-gray-900: #1f2830;
+    --shadow-popover: 0 1.5rem 3rem 0 rgba(0, 0, 0, 0.15), 0 0.5rem 0.75rem 0 rgba(0, 0, 0, 0.20);
+
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 16px;
+}
+
+.nps-modal__overlay {
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.nps-modal__content {
+    background-color: white;
+    border-radius: 0.5em;
+    box-shadow: var(--shadow-popover);
+    left: 0;
+    margin: 0 auto;
+    max-width: 576px;
+    opacity: 0;
+    padding: 3em 2em 2.5em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 200ms ease-out;
+    width: max-content;
+}
+
+.close-button {
+    background: transparent;
+    border: none;
+    color: var(--color-gray-700);
+    cursor: pointer;
+    font-size: 2em;
+    line-height: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    transition: all 100ms ease-in-out;
+}
+
+.close-button:hover {
+    color: var(--color-gray-900);
+}
+
+.question-prompt {
+    display: block;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    margin-bottom: 1.5em;
+}
+
+/* Score Selection Styles */
+
+.score-selector-container {
+    margin: 0 auto;
+}
+
+.score-selector {
+    margin: 0 auto;
+    width: max-content;
+}
+
+.score-options {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    position: relative;
+}
+
+.score-selection {
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid currentColor;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1em;
+    height: 2.25em;
+    text-align: center;
+    transition: all 100ms ease-out;
+    width: 2.25em;
+}
+
+.score-selection:not(:first-of-type) {
+    margin-left: 0.5em;
+}
+
+.score-selection__active {
+    background: var(--color-main);
+    border-color: var(--color-main);
+    color: black;
+}
+
+.score-selection:hover {
+    background: var(--color-hover);
+    border-color: var(--color-hover);
+}
+
+.score-labels {
+    display: flex;
+    font-size: 0.8em;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+/* Follow-Up Question Form Styles */
+
+.follow-up-container {
+    min-width: 400px;
+    width: 100%;
+}
+
+.comment-input {
+    border: 1px solid black;
+    border-radius: 0.25em;
+    letter-spacing: 0.025em;
+    line-height: 1.25em;
+    padding: 0.25em 0.375em;
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+    width: 100%;
+}
+
+.button-submit {
+    background: var(--color-main);
+    border: 2px solid var(--color-main);
+    border-radius: 2em;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0.5em 1.5em;
+    transition: all 150ms ease-out;
+}
+
+.button-submit:hover {
+    background-color: var(--color-hover);
+    border-color: var(--color-hover);
+}
+
+/* Revshare Custom Styling */
+
+.revshare {
+    background: linear-gradient(32.7deg, #0f87ff 0%, #00d4ff 100%);
+    color: white;
+}
