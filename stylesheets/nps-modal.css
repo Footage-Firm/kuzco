@@ -62,10 +62,14 @@
 
 .score-selector-container {
     margin: 0 auto;
-    max-width: max-content;
 }
 
 .score-selector {
+    margin: 0 auto;
+    width: max-content;
+}
+
+.score-options {
     align-items: flex-start;
     display: flex;
     flex-flow: row nowrap;
@@ -107,6 +111,7 @@
 /* Follow-Up Question Form Styles */
 
 .follow-up-container {
+    min-width: 400px;
     width: 100%;
 }
 
