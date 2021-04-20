@@ -101,6 +101,11 @@
     color: black;
 }
 
+.score-selection:hover {
+    background: var(--color-hover);
+    border-color: var(--color-hover);
+}
+
 .score-labels {
     display: flex;
     font-size: 0.8em;
