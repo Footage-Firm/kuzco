@@ -20,6 +20,7 @@ const NPSModal = (props) => {
         maxScoreBlurb,
         minScoreBlurb,
         modalClassName,
+        modalClassPrefix,
         neutralFollowUpQuestion,
         onCommentSubmit,
         onScoreClick,
@@ -96,10 +97,10 @@ const NPSModal = (props) => {
             >×</button>
 
             { !!header && (
-                <h2 className="modal-header">{header}</h2>
+                <h2 className={[modalClassPrefix, 'modal-header'].join('-')}>{header}</h2>
             )}
 
-            <div className="modal-body">
+            <div className={[modalClassPrefix, 'modal-body'].join('-')}>
                 { showFollowUp
                     ? (
                         <form className="follow-up-container">
@@ -153,6 +154,7 @@ const NPSModal = (props) => {
 NPSModal.propTypes = {
     header: PropTypes.string,
     modalClassName: PropTypes.string,
+    modalClassPrefix: PropTypes.string,
     overlayClassName: PropTypes.string,
     mainQuestion: PropTypes.string.isRequired,
     promoterFollowUpQuestion: PropTypes.string.isRequired,
@@ -174,6 +176,7 @@ NPSModal.defaultProps = {
     maxScoreBlurb: 'Very likely',
     minScoreBlurb: 'Not likely',
     modalClassName: 'nps-modal',
+    modalClassPrefix: '',
     overlayClassName: '',
 }
 
