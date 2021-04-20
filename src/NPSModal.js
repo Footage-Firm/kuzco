@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import '../stylesheets/nps-modal.css';
 
 const getScoreRange = (maxScore) => {
-    return Array.from({ length: maxScore + 1 }, (_, i) => i);
+    return Array.from({ length: maxScore }, (_, i) => i + 1);
 }
 
 Modal.setAppElement('body');
