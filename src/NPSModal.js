@@ -126,23 +126,25 @@ const NPSModal = (props) => {
                         >
                             <p className="question-prompt">{mainQuestion}</p>
 
-                            <div className="score-selector">
-                                <div className="score-options">
-                                    {scoreRange.map((scoreOption) => (
-                                        <button
-                                            key={scoreOption}
-                                            className={`score-selection ${scoreOption <= score ? 'score-selection__active' : ''}`}
-                                            onMouseEnter={() => setScore(scoreOption)}
-                                            onClick={() => handleScoreSelected(score)}
-                                        >
-                                            {scoreOption}
-                                        </button>
-                                    ))}
-                                </div>
+                            <div className="scroll-container">
+                                <div className="score-selector">
+                                    <div className="score-options">
+                                        {scoreRange.map((scoreOption) => (
+                                            <button
+                                                key={scoreOption}
+                                                className={`score-selection ${scoreOption <= score ? 'score-selection__active' : ''}`}
+                                                onMouseEnter={() => setScore(scoreOption)}
+                                                onClick={() => handleScoreSelected(score)}
+                                            >
+                                                {scoreOption}
+                                            </button>
+                                        ))}
+                                    </div>
 
-                                <div className="score-labels">
-                                    <p className="score-label score-label__min">{minScoreBlurb}</p>
-                                    <p className="score-label score-label__max">{maxScoreBlurb}</p>
+                                    <div className="score-labels">
+                                        <p className="score-label score-label__min">{minScoreBlurb}</p>
+                                        <p className="score-label score-label__max">{maxScoreBlurb}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
