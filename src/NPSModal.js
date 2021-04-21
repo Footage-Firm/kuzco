@@ -77,7 +77,9 @@ const NPSModal = (props) => {
         setShowFollowUp(true);
     }
 
-    const handleCommentSubmit = () => {
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+
         onCommentSubmit(comment, followUpQuestion);
         handleCloseRequest();
     }
@@ -103,7 +105,7 @@ const NPSModal = (props) => {
             <div className={[modalClassPrefix, 'modal-body'].join('-')}>
                 { showFollowUp
                     ? (
-                        <form className="follow-up-container">
+                        <form className="follow-up-container" onSubmit={handleCommentSubmit}>
                             <label htmlFor="comment-input" className="question-prompt">{followUpQuestion}</label>
                             <textarea
                                 className="comment-input"
@@ -115,7 +117,7 @@ const NPSModal = (props) => {
                             <div className="form-actions">
                                 <button
                                     className="button-submit"
-                                    onClick={handleCommentSubmit}
+                                    type="submit"
                                 >Submit</button>
                             </div>
                         </form>
