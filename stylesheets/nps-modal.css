@@ -35,7 +35,7 @@
     width: max-content;
 }
 
-.close-button {
+#nps-modal .close-button {
     background: transparent;
     border: none;
     color: var(--color-gray-700);
@@ -48,11 +48,11 @@
     transition: all 100ms ease-in-out;
 }
 
-.close-button:hover {
+#nps-modal .close-button:hover {
     color: var(--color-gray-900);
 }
 
-.question-prompt {
+#nps-modal .question-prompt {
     display: block;
     font-weight: 600;
     letter-spacing: 0.025em;
@@ -61,21 +61,21 @@
 
 /* Score Selection Styles */
 
-.scroll-container {
+#nps-modal .scroll-container {
     overflow-x: auto;
     width: 100%;
 }
 
-.score-selector-container {
+#nps-modal .score-selector-container {
     margin: 0 auto;
 }
 
-.score-selector {
+#nps-modal .score-selector {
     margin: 0 auto;
     width: max-content;
 }
 
-.score-options {
+#nps-modal .score-options {
     align-items: flex-start;
     display: flex;
     flex-flow: row nowrap;
@@ -83,7 +83,7 @@
     position: relative;
 }
 
-.score-selection {
+#nps-modal .score-selection {
     border-radius: 50%;
     background: transparent;
     border: 2px solid currentColor;
@@ -96,22 +96,22 @@
     width: 2.25em;
 }
 
-.score-selection:not(:first-of-type) {
+#nps-modal .score-selection:not(:first-of-type) {
     margin-left: 0.5em;
 }
 
-.score-selection__active {
+#nps-modal .score-selection__active {
     background: var(--color-main);
     border-color: var(--color-main);
     color: black;
 }
 
-.score-selection:hover {
+#nps-modal .score-selection:hover {
     background: var(--color-hover);
     border-color: var(--color-hover);
 }
 
-.score-labels {
+#nps-modal .score-labels {
     display: flex;
     font-size: 0.8em;
     justify-content: space-between;
@@ -121,11 +121,11 @@
 
 /* Follow-Up Question Form Styles */
 
-.follow-up-container {
+#nps-modal .follow-up-container {
     width: 100%;
 }
 
-.comment-input {
+#nps-modal .comment-input {
     border: 1px solid black;
     border-radius: 0.25em;
     letter-spacing: 0.025em;
@@ -134,14 +134,14 @@
     width: 100%;
 }
 
-.form-actions {
+#nps-modal .form-actions {
     display: flex;
     justify-content: center;
     margin-top: 1.5em;
     width: 100%;
 }
 
-.button-submit {
+#nps-modal .button-submit {
     background: var(--color-main);
     border: 2px solid var(--color-main);
     border-radius: 2em;
@@ -152,14 +152,14 @@
     transition: all 150ms ease-out;
 }
 
-.button-submit:hover {
+#nps-modal .button-submit:hover {
     background-color: var(--color-hover);
     border-color: var(--color-hover);
 }
 
 /* Revshare Custom Styling */
 
-.revshare {
+#nps-modal.revshare {
     background: linear-gradient(32.7deg, #0f87ff 0%, #00d4ff 100%);
     color: white;
 }
